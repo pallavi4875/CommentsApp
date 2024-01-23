@@ -59,6 +59,7 @@ class Comments extends Component {
       comment: Description,
       isLiked: false,
       createdAt: new Date(),
+      initialClassName: initialContainerBackgroundColorClassName,
     }
     this.setState(prevState => ({
       commentList: [...prevState.commentList, newComment],
@@ -77,6 +78,8 @@ class Comments extends Component {
 
   render() {
     const {name, Description, commentList} = this.state
+    const commentCount = commentList.length
+
     return (
       <div className="app-container">
         <div className="responsive-container">
@@ -105,16 +108,19 @@ class Comments extends Component {
               Add Comment
             </button>
           </form>
-          <ul className="comments-list">
-            {commentList.map(comment => (
-              <CommentItem
-                key={comment.id}
-                commentDetails={comment}
-                toggleLike={this.toggleIsLiked}
-                deleteComment={this.deleteComment}
-              />
-            ))}
-          </ul>
+          <p>{commentCount} comments</p>
+          {commentCount > 0 && (
+            <ul className="comments-list">
+              {commentList.map(comment => (
+                <CommentItem
+                  key={comment.id}
+                  commentDetails={comment}
+                  toggleLike={this.toggleIsLiked}
+                  deleteComment={this.deleteComment}
+                />
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     )

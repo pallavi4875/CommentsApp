@@ -1,4 +1,5 @@
 import {Component} from 'react'
+
 import {v4 as uuidv4} from 'uuid'
 
 import './index.css'
@@ -19,9 +20,9 @@ const initialContainerBackgroundClassNames = [
 
 class Comments extends Component {
   state = {
-    commentList: []
-    name: ''
-    Description: ''
+    commentList: [],
+    name: '',
+    Description: '',
   }
 
   toggleIsLiked = id => {
@@ -44,14 +45,13 @@ class Comments extends Component {
   onAddComment = event => {
     event.preventDefault()
     const {name, Description} = this.state
-     const initialBackgroundColorClassName = `initial-container ${
+    const initialContainerBackgroundColorClassName = `initial-container ${
       initialContainerBackgroundClassNames[
         Math.ceil(
           Math.random() * initialContainerBackgroundClassNames.length - 1,
         )
       ]
     }`
-
 
     const newComment = {
       id: uuidv4(),
@@ -82,19 +82,24 @@ class Comments extends Component {
         <div className="responsive-container">
           <h1 className="heading">COMMENTS</h1>
           <p className="para">Say something about 4.o Technologies</p>
+          <img
+            src="https://assets.ccbp.in/frontend/react-js/comments-app/comments-img.png "
+            alt="comments"
+            className="image"
+          />
           <form className="comment-form-container" onSubmit={this.onAddComment}>
             <input
               type="text"
               value={name}
               onChange={this.onChangeName}
               className="input"
-              placeholder="Name"
+              placeholder="Your Name"
             />
             <textarea
               className="input"
               value={Description}
               onChange={this.onChangeDescription}
-              placeholder="Description"
+              placeholder="Your Comment"
             />
             <button type="submit" className="button">
               Add Comment
